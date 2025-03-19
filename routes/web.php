@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\TokenVerificationMiddleware;
 
@@ -16,3 +17,12 @@ Route::post('/user-update', [UserController::class, 'UpdateProfile'])->middlewar
 
 // User Logout
 Route::get('/logout', [UserController::class, 'UserLogout']);
+
+// Page Routes
+Route::get('/', [HomeController::class, 'HomePage']);
+
+Route::get('/userLogin', [UserController::class, 'LoginPage']);
+Route::get('/userRegistration', [UserController::class, 'RegistrationPage']);
+Route::get('/sendOtp', [UserController::class, 'SendOtpPage']);
+Route::get('/verifyOtp', [UserController::class, 'VerifyOTPPage']);
+Route::get('/resetPassword', [UserController::class, 'ResetPasswordPage'])->middleware([TokenVerificationMiddleware::class]);
